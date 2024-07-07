@@ -1,0 +1,18 @@
+-------- PARAMETERS FOR EXPERIMENT --------
+Number of Terms in Exact Solution (M) = 60
+Num Terms in Truncated Farfield Expansion = 10
+Number of Points for Evaluating Farfield = 701
+Error Tolerance = 1.000000e-10
+Maximum Number of Iterations = 1000
+-------------------------------------------
+
+Boundary Max Error 
+   PPW     h         #1 error      #1 order    #2 error      #2 order
+   30    0.03333    8.04038e-03        NaN   8.85286e-03        NaN
+   40    0.02500    4.44243e-03    2.06226   4.85848e-03    2.08569
+   50    0.02000    2.79463e-03    2.07715   3.06550e-03    2.06375
+   60    0.01667    1.91671e-03    2.06826   2.10986e-03    2.04908
+ 
+ 
+Least squares fit for obstacle 1 boundary gives E(h) = 9.16433 * h^2.06925 
+Least squares fit for obstacle 2 boundary gives E(h) = 10.0668 * h^2.06934

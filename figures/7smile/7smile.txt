@@ -1,0 +1,44 @@
+-------- PARAMETERS FOR EXPERIMENT --------
+Number of Terms in Exact Solution (M) = 120
+Num Terms in Truncated Farfield Expansion = 10
+Number of Points for Evaluating Farfield = 701
+Error Tolerance = 1.000000e-10
+Maximum Number of Iterations = 1000
+-------------------------------------------
+
+\begin{tabular}{c | c | c | c | c | c | c | c | c | c}
+   PPW  & h &  \#1 error & \#1 order  &  \#2 error  & \#2 order & \#3 error & \#3 order & \#4 error & \#4 order  \\
+   \hline
+   30  & 0.03333  & 1.26192e-02   &   &  8.80087e-03 & &   8.65337e-03 & &  1.11051e-02  & \\
+   \hline
+   40  & 0.02500  & 6.97659e-03  & 2.06013 & 4.88655e-03  & 2.04519 & 4.82399e-03  & 2.03123 & 6.17386e-03  & 2.04073 \\
+   \hline
+   50  & 0.02000 &  4.41514e-03  &  2.05034 & 3.10548e-03 & 2.03152 & 2.81281e-03 & 2.41735 & 3.91679e-03 & 2.03928 \\
+\end{tabular}
+
+\begin{tabular}{c | c | c | c | c | c | c | c }
+   PPW  & h &  \#5 error & \#5 order  &  \#6 error  & \#6 order & \#7 error & \#7 order \\
+   \hline
+   30  & 0.03333  & 8.03806e-03 & &   9.49762e-03  & &  5.86872e-03  & \\
+   \hline
+   40  & 0.02500  & 4.49143e-03 &  2.02312 &  5.24066e-03 &  2.06684 &  3.23683e-03  &  2.06840 \\
+   \hline
+   50  & 0.02000 &  2.84306e-03 &  2.04931 & 3.31483e-03 &  2.05268 & 2.04712e-03  & 2.05320 \\
+\end{tabular}
+
+
+Least squares fit gives E(h) = 62.6389 * h^2.03676 
+Boundary Max Error 
+   PPW     h         #1 error      #1 order    #2 error      #2 order    #3 error      #3 order    #4 error      #4 order    #5 error      #5 order    #6 error      #6 order    #7 error      #7 order
+   30    0.03333    1.26192e-02        NaN   8.80087e-03        NaN   8.65337e-03        NaN   1.11051e-02        NaN   8.03806e-03        NaN   9.49762e-03        NaN   5.86872e-03        NaN
+   40    0.02500    6.97659e-03    2.06013   4.88655e-03    2.04519   4.82399e-03    2.03123   6.17386e-03    2.04073   4.49143e-03    2.02312   5.24066e-03    2.06684   3.23683e-03    2.06840
+   50    0.02000    4.41514e-03    2.05034   3.10548e-03    2.03152   2.81281e-03    2.41735   3.91679e-03    2.03928   2.84306e-03    2.04931   3.31483e-03    2.05268   2.04712e-03    2.05320
+ 
+ 
+Least squares fit for obstacle 1 boundary gives E(h) = 13.7379 * h^2.05605 
+Least squares fit for obstacle 2 boundary gives E(h) = 9.05512 * h^2.0395 
+Least squares fit for obstacle 3 boundary gives E(h) = 15.1723 * h^2.19194 
+Least squares fit for obstacle 4 boundary gives E(h) = 11.4555 * h^2.04013 
+Least squares fit for obstacle 5 boundary gives E(h) = 8.12946 * h^2.03402 
+Least squares fit for obstacle 6 boundary gives E(h) = 10.5114 * h^2.06095 
+Least squares fit for obstacle 7 boundary gives E(h) = 6.51985 * h^2.06207
