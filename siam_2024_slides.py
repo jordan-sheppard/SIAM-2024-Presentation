@@ -351,24 +351,25 @@ class Presentation(Slide, PresentationBase):
     def title_slide(self):
         # -------------------------- TITLE SLIDE --------------------------
         # 1) Get text
-        title = Paragraph(r"An Iterative Approach to Multiple-Obstacle",
-                          "Acoustic Scattering Problems",
+        title = Paragraph(r"A Residual-Based Approach to Boundary Value Problems",
+                          "for Multiple-Obstacle Acoustic Scattering",
                           line_spacing=1.25,
-                          alignment='center')
-        date = Tex("July 7, 2024")
+                          alignment='center'
+        )
+        date = Tex("SIAM Annual Meeting - July 7, 2024")
         author = Tex(r"\textbf{Jordan Sheppard}, MS Student, Brigham Young University")
         university = Tex("Vianey Villamizar, Professor, Brigham Young University")
 
         # 2) Set format
         # Title: Top, centered, biggest
         title.set_color(BLACK)
-        title.scale(0.9).to_edge(UP)
+        title.scale(0.8).to_edge(UP)
 
         # Author/Advisor/Date - All together, smaller, centered under title
         subtitles = (
             VGroup(author, university, date)
             .arrange(direction=DOWN)      # Arrange them vertically and centered
-            .scale(0.8)
+            .scale(0.7)
             .next_to(title,DOWN*3.5)
         )
         subtitles.set_color(BLACK) 
@@ -685,13 +686,13 @@ class Presentation(Slide, PresentationBase):
         self.next_slide()
         
         truncation_explanation_1 = Tex(
-            'Our ABC is formulated by first truncating this',
+            'Following Villamizar et al. [1], our ABC',
             font_size=15,
             color=BLACK,
             tex_environment='flushleft',
         ).next_to(title, DOWN, aligned_edge=LEFT, buff=0.2)
         truncation_explanation_2 = Tex(
-            'expression to $L$ terms:',
+            r'is formulated by first truncating this expression \newline to $L$ terms:',
             font_size=15,
             color=BLACK,
             tex_environment='flushleft',
@@ -717,10 +718,22 @@ class Presentation(Slide, PresentationBase):
             font_size=22,
             color=PURE_RED).next_to(arrs[-1], DOWN/2)
         
+        paper_reference_villamizar = (
+            Tex(
+                r'[1] V. Villamizar, J. Badger, S. Acosta, High order local \newline farfield expansions absorbing boundary conditions \newline for multiple scattering, J. Comp. Phys. 460 \newline (2022) 44 pages.',
+                font_size=10,
+                color=BLACK,
+                tex_environment='flushleft'
+            ).next_to(truncated_karp_equation, DOWN, aligned_edge=LEFT, buff=0.6)
+        )
+
+
+
         self.play(FadeOut(explanation_1), FadeOut(explanation_2), FadeOut(explanation_3), FadeOut(recursion_formulas))
         self.play(
             FadeIn(truncation_explanation_1),
             FadeIn(truncation_explanation_2),
+            FadeIn(paper_reference_villamizar),
             TransformMatchingShapes(karp_equation, truncated_karp_equation),
             TransformMatchingShapes(karp_symbol, truncated_karp_symbol)
         )
@@ -731,6 +744,7 @@ class Presentation(Slide, PresentationBase):
         self.play(
             FadeOut(truncation_explanation_1),
             FadeOut(truncation_explanation_2),
+            FadeOut(paper_reference_villamizar),
             truncated_karp_equation.animate.next_to(title, DOWN, aligned_edge=LEFT, buff=0.2)
         )
 
@@ -1399,7 +1413,7 @@ class Presentation(Slide, PresentationBase):
         
         paper_reference = (
             Tex(
-                r'\mbox{[1] Z. Xie, R. Zhang, B. Wang, L.-L. Wang, An efficient iterative method for solving multiple scattering in locally inhomogeneous media,}\newline',
+                r'\mbox{[2] Z. Xie, R. Zhang, B. Wang, L.-L. Wang, An efficient iterative method for solving multiple scattering in locally inhomogeneous media,}\newline',
                 r'\quad \quad \quad \quad Computer Methods in Applied Mechanics and Engineering 358 (2020) 112642.',
                 font_size=18,
                 color=BLACK
@@ -1408,12 +1422,13 @@ class Presentation(Slide, PresentationBase):
 
         intro_text = (
            Tex(
-                r'\item Similar to the approach used by Xie, Zhang, et al. [1], we use a GMRES-based approach to solve this BVP',
+                r'\item Similar to the approach used by Xie, Zhang, et al. [2], we use a GMRES-based approach to solve this BVP',
                 r'\item \textbf{Main Idea}: Use error residual vectors as boundary forcing terms',
                 r'\item Recover a sequence of boundary data $(\psi_m^{(n)})_{n \in \mathbb{N}}$ '
-                r' such that'
-                r' $$\left \lVert -\mathcal{B}(u_{inc}) - \psi^{(n)}\right \rVert$$ '
-                r' where $\mathcal{B}(u_{inc}) = \begin{bmatrix}\mathcal{B}_1(u_{inc}) & \ldots & \mathcal{B}_M(u_{inc}) \end{bmatrix}^\intercal$ \newline'
+                r' that, for each $n$, minimizes'
+                r' $$\left \lVert -\mathcal{B}(u_{inc}) - K^{(n)} - \psi^{(n)}  \right \rVert$$ '
+                r' where $\mathcal{B}(u_{inc}) = \begin{bmatrix}\mathcal{B}_1(u_{inc}) & \ldots & \mathcal{B}_M(u_{inc}) \end{bmatrix}^\intercal$, \newline'
+                r' $K = \begin{bmatrix} \sum_{\bar{m} \neq 1} \mathcal{K}_{\bar{m}, L}^{(n)} & \ldots & \sum_{\bar{m} \neq M} \mathcal{K}_{\bar{m}, L}^{(n)}\end{bmatrix}$, \newline'
                 r' and $\psi^{(n)} = \begin{bmatrix}\psi_1^{(n)} & \ldots & \psi_M^{(n)} \end{bmatrix}^\intercal$',
                 tex_environment='itemize',
                 font_size=30,
@@ -1424,13 +1439,19 @@ class Presentation(Slide, PresentationBase):
             r'\psi_m^{(*)}': {
                 'color': self.PSI_COLOR,
                 'indexes': [
-                    [2,[32,33,34,35,36,61,62,63,64,112,113,114,115,116,120,121,122,123,124]]
+                    [2,[32,33,34,35,36,81,82,83,84,163,164,165,166,169,170,171,172,173,177,178,179,180,181]]
                 ]
             },
             r'u_inc': {
                 'color': DARK_BROWN,
                 'indexes': [
-                    [2, [55,56,57,58,75,76,77,78,85,86,87,88,106,107,108,109]]
+                    [2, [70,71,72,73,105,106,107,108,116,117,118,119]]
+                ]
+            },
+            r'\mathcal{K}_{\bar{m}, L}^{(n)}': {
+                'color': PURE_RED,
+                'indexes': [
+                    [2, [133,134,135,136,137,138,139,140,150,151,152,153,154,155,156,157]]
                 ]
             }
         }
@@ -1901,22 +1922,22 @@ class Presentation(Slide, PresentationBase):
             MathTex(
                 r'&\psi_m^{(1)} = \psi_m^{(0)} + y_1 q_m^{(1)} \\ '
                 r'&y_1 = \operatorname{argmin} J(y) \\ '
-                r'&J(y) = \lVert -\mathcal{B}(u_{inc}) - (\psi^{(0)} + y q^{(1)})\rVert',
+                r'&J(y) = \lVert -\mathcal{B}(u_{inc}) - K^{(0)} - (\psi^{(0)} + y q^{(1)})\rVert',
                 color=BLACK,
                 font_size=34
-            ).next_to(step_7, DOWN, aligned_edge=LEFT, buff=0.4)
+            ).next_to(step_7, DOWN, aligned_edge=LEFT, buff=0.9)
         )
         tex_to_color_map = {
             r'\psi_m^{*}': {
                 'color': self.PSI_COLOR,
                 'indexes': [
-                    [0,[0,1,2,3,4,6,7,8,9,10,48,49,50,51]]
+                    [0,[0,1,2,3,4,6,7,8,9,10,53,54,55,56]]
                 ]
             },
             r'\q_m^{*}': {
                 'color': self.NORMED_RESIDUAL_COLOR,
                 'indexes': [
-                    [0,[14,15,16,17,18,54,55,56,57]]
+                    [0,[14,15,16,17,18,59,60,61,62]]
                 ]
             },
             r'u_{inc}': {
