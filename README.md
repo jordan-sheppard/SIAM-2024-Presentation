@@ -4,7 +4,7 @@
     Brigham Young University
     July 8, 2024
 
-These are my slides for my contributed presentation at the 2024 SIAM Annual Metting. My presentation is entitled "An Iterative Approach to Multiple-Obstacle Acoustic Scattering Problems".
+These are my slides for my contributed presentation at the 2024 SIAM Annual Metting. My presentation is entitled "A Residual-Based Approach to Boundary-Value Problems for Multiple-Obstacle Acoustic Scattering".
 
 They were produced using Manim CE with Manim Slides. Additional details are in requirements.txt.
 
